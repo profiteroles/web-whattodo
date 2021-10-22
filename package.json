@@ -1,0 +1,21 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "To do List using Bootstrap node, express, ejs. mongodb",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "EROL A'NIL",
+  "license": "ISC",
+  "engines": {
+    "node": "14.17.6"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.0.11"
+  }
+}
