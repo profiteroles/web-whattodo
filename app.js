@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+require('dotenv').config();
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://admin:admin@cluster0.ejze9.mongodb.net/todolistDB", { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect(process.env.ADMINPATH, { useUnifiedTopology: true, useNewUrlParser: true });
 
 const itemsSchema = {
   name: String
@@ -108,6 +109,7 @@ app.get('/:customListRoute', function (req, res) {
   List.findOne({ name: routeName }, function (err, docs) {
     if (!err) {
       if (!docs) {
+        console.log("Creating a new list collection name: " + routeName);
         const list = new List({
           name: routeName,
           items: defaultItems,
@@ -115,7 +117,7 @@ app.get('/:customListRoute', function (req, res) {
         list.save();
         res.redirect("/" + routeName);
       } else {
-        console.log("Already exist!");
+        console.log("Entering existing list Collection!");
         res.render("list", { listTitle: docs.name, newListItems: docs.items });
       }
     }
